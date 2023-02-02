@@ -9,7 +9,6 @@ class ChatGTP:
 
     def ask(self, text: str):
         response = openai.Completion.create(model=self.model, prompt=text, temperature=0.7, max_tokens=1000)
-        print(response)
         text = ''
         for choice in response.choices:
             text += choice.text.lstrip()
