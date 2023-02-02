@@ -3,8 +3,18 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - .gitignore
+      - LICENSE
+      - README.md
+      - venv
   pull_request:
     branches: [ "main" ]
+    paths-ignore:
+      - .gitignore
+      - LICENSE
+      - README.md
+      - venv
 
 jobs:
 
@@ -23,4 +33,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag newbenhd/chatgptbot:$(date +%s)
     - name: Deploy the Docker image
-      run: docker push ${{secrets.DOCKER_USER}}/chatgptbot
+      run: docker push --all-tags ${{secrets.DOCKER_USER}}/chatgptbot
